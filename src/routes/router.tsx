@@ -1,9 +1,9 @@
 import React, { lazy } from 'react';
 import ErrorPage from '@components/ErrorPage';
-import LoginPage from '../layouts/components/Login';
+import LoginPage from '@pages/LoginPage';
 import App, { authLoader } from '../App';
-import { createBrowserRouter, Navigate, RouteObject } from 'react-router-dom';
-import { DashboardOutlined, EditOutlined, TableOutlined, BarsOutlined, UserOutlined } from '@ant-design/icons';
+import { createBrowserRouter, RouteObject } from 'react-router-dom';
+import { BarsOutlined, DashboardOutlined, EditOutlined, TableOutlined, UserOutlined } from '@ant-design/icons';
 
 const Dashboard = lazy(() => import('@pages/Dashboard'));
 const FormPage = lazy(() => import('@pages/FormPage'));

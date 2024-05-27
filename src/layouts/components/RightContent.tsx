@@ -1,9 +1,9 @@
 import React, { ChangeEvent } from 'react';
-import { Avatar, Dropdown, MenuProps, Button, Input, Badge, Space } from 'antd';
-import { SkinOutlined, BellOutlined } from '@ant-design/icons';
-import { useLoginStore, useGlobalStore } from '@stores/index';
+import { Avatar, Badge, Button, Dropdown, Input, MenuProps, Space } from 'antd';
+import { BellOutlined, SkinOutlined } from '@ant-design/icons';
+import { useGlobalStore, useLoginStore } from '@stores/index';
 import { debounce } from 'lodash-es';
-import styles from '../index.module.scss';
+import styles from '../index.module.css';
 
 const RightContent: React.FC = () => {
   const { setUserInfo } = useLoginStore();

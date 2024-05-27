@@ -5,14 +5,11 @@
 import AutoImport from 'unplugin-auto-import/vite';
 
 export const AutoImportDeps = () => {
-    return AutoImport({
-        dts: 'types/auto-imports.d.ts',
-        include: [
-            /\.[tj]sx?$/, // .ts, .tsx, .js, .jsx
-        ],
-        imports: [
-            'react',
-            'react-router-dom',
-        ],
-    });
+  return AutoImport({
+    dts: 'types/auto-imports.d.ts',
+    include: [
+      /\.[tj]sx?$/, // .ts, .tsx, .js, .jsx
+    ],
+    imports: ['react', 'react-router-dom'],
+  });
 };

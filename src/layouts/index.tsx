@@ -1,7 +1,6 @@
-import React, { useState, Suspense } from 'react';
-import { Outlet, useLoaderData, useNavigate, NonIndexRouteObject, useLocation, Navigate } from 'react-router-dom';
-import { MenuProps } from 'antd';
-import { Layout, Menu, theme, Spin } from 'antd';
+import React, { Suspense, useState } from 'react';
+import { Navigate, NonIndexRouteObject, Outlet, useLoaderData, useLocation, useNavigate } from 'react-router-dom';
+import { Layout, Menu, MenuProps, Spin, theme } from 'antd';
 import HeaderComp from './components/Header';
 import { useLoginStore } from '@stores/index';
 import { routes } from '../routes/router';

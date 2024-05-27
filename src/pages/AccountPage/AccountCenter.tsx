@@ -1,6 +1,6 @@
 import { ProCard } from '@ant-design/pro-components';
 import React from 'react';
-import { Avatar, Row, Col, Typography } from 'antd';
+import { Avatar, Col, Row, Typography } from 'antd';
 
 const url = 'https://gw.alipayobjects.com/zos/antfincdn/XAosXuNZyF/BiazfanxmamNRoxxVxka.png';
 

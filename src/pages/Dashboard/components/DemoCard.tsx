@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { StatisticCard } from '@ant-design/pro-components';
 import RcResizeObserver from 'rc-resize-observer';
+
 const imgStyle = {
   display: 'block',
   width: 42,

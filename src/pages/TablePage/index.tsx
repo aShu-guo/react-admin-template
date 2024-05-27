@@ -1,10 +1,10 @@
 /* eslint-disable @typescript-eslint/no-inferrable-types */
-import React, { useRef } from 'react';
-import { EllipsisOutlined, PlusOutlined } from '@ant-design/icons';
-import type { ActionType, ProColumns } from '@ant-design/pro-components';
-import { ProTable, TableDropdown } from '@ant-design/pro-components';
-import { Button, Dropdown, Space, Tag } from 'antd';
-import { getTable } from '@services/table';
+import React, {useRef} from 'react';
+import {EllipsisOutlined, PlusOutlined} from '@ant-design/icons';
+import type {ActionType, ProColumns} from '@ant-design/pro-components';
+import {ProTable, TableDropdown} from '@ant-design/pro-components';
+import {Button, Dropdown, Space, Tag} from 'antd';
+import {getTable} from '@services/table';
 
 export const waitTimePromise = async (time: number = 100) => {
   return new Promise((resolve) => {

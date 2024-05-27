@@ -1,5 +1,5 @@
 import React from 'react';
-import { Row, Col, Typography } from 'antd';
+import { Col, Row, Typography } from 'antd';
 import RightContent from './RightContent';
 
 const { Text } = Typography;

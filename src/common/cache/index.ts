@@ -51,16 +51,16 @@ export function setAliveValue<T>(key: Key, value: CacheEntity<T>, expire = 7 * 2
  * token 是否有效
  * @returns {boolean}
  */
-export function isExpire<T>(key: Key): { isExpire: boolean; value: CacheEntity<T> | undefined } {
+export function isExpire<T>(key: Key): { isValid: boolean; value: CacheEntity<T> | undefined } {
   const value = getValue<T>(key);
 
-  let isExpire = true;
+  let isValid = !!value;
 
   if (value && Date.now().valueOf() - value.start < value.expire) {
-    isExpire = false;
+    isValid = false;
   }
 
-  return { isExpire, value };
+  return { isValid, value };
 }
 
 /**

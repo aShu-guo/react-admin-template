@@ -1,4 +1,4 @@
-import React, { Suspense, lazy } from 'react';
+import React, { lazy, Suspense } from 'react';
 import { ConfigProvider, Spin } from 'antd';
 import { useGlobalStore } from '@stores/index';
 import zhCN from 'antd/locale/zh_CN';
@@ -12,7 +12,6 @@ dayjs.locale('zh-cn');
 const BasicLayout = lazy(() => import('./layouts'));
 
 export function authLoader() {
-  console.log('>>>>>.');
   return { isAdmin: true };
 }
 

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Row, Col } from 'antd';
+import { Col, Row } from 'antd';
 import DemoCard from './components/DemoCard';
 import DemoColumn from './components/DemoColumn';
 import DemoPie from './components/DemoPie';
