@@ -1,9 +1,16 @@
 import React, { lazy } from 'react';
-import ErrorPage from '@components/ErrorPage';
+import ErrorPage from '@pages/ErrorPage';
 import LoginPage from '@pages/LoginPage';
-import App, { authLoader } from '../App';
+import App from '../App';
 import { createBrowserRouter, RouteObject } from 'react-router-dom';
-import { BarsOutlined, DashboardOutlined, EditOutlined, TableOutlined, UserOutlined } from '@ant-design/icons';
+import {
+  BarsOutlined,
+  DashboardOutlined,
+  EditOutlined,
+  TableOutlined,
+  UserOutlined,
+} from '@ant-design/icons';
+import authLoader from '../layouts/BasicLayout/authLoader';
 
 const Dashboard = lazy(() => import('@pages/Dashboard'));
 const FormPage = lazy(() => import('@pages/FormPage'));
@@ -28,7 +35,7 @@ const routes: RouteObject[] = [
             element: <Dashboard />,
           },
           {
-            path: 'form',
+            path: '/form',
             title: '表单页',
             icon: <EditOutlined />,
             element: <FormPage />,
@@ -46,7 +53,7 @@ const routes: RouteObject[] = [
             element: <DetailPage />,
           },
           {
-            path: 'account',
+            path: '/account',
             title: '个人页',
             icon: <UserOutlined />,
             children: [

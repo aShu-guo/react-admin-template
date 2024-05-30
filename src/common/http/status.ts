@@ -1,4 +1,4 @@
-import {message} from 'ant-design-vue/es';
+import {message} from 'antd';
 
 /**
  * status非200异常处理

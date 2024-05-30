@@ -1,54 +1,55 @@
-import React, {useMemo, useState} from 'react';
-import {Button, Form, Input, Select} from 'antd';
-import {v4 as uuidv4} from 'uuid';
+import React from 'react';
+import { Button, Form, Input, Select } from 'antd';
+import VerificationCode from '@components/VerificationCode';
+import { auth } from '@services/auth';
+import useUserinfoStore from '@stores/userinfo';
+import { post } from '@common/http';
+import AuthApis from '@services/auth';
 
 const { Option } = Select;
 
-const onFinish = (values: any) => {
-  console.log('Received values of form: ', values);
-};
-
-const ApiHost = import.meta.env.VITE_API_HOST + '/uav-info-manage/uasmanage/verifyCode/generateVerifyCode?uuid=';
-
-const LoginPage: React.FC = () => {
-  const [uuid, setUuid] = useState(uuidv4().replace(/-/g, ''));
-  const src = useMemo(() => ApiHost + uuid, [uuid]);
+const App: React.FC = () => {
+  const store = useUserinfoStore();
+  const onFinish = async (values: any) => {
+    const { Authorization, name, userId } = await post(AuthApis.doLogin, values, undefined, {
+      needAuth: false,
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8',
+      },
+    });
+    store.setUserInfo({ name, userId });
+    store.setToken(Authorization);
+  };
 
   return (
     <div className="flex-center">
       <Form
         name="complex-form"
-        className="flex flex-col"
         onFinish={onFinish}
+        initialValues={{ username: 'admin', password: 'a1234567', verifyCode: '0000' }}
         labelCol={{ span: 8 }}
         wrapperCol={{ span: 16 }}
         style={{ maxWidth: 600 }}
       >
-        <Form.Item
-          label=""
-          name="username"
-          style={{ marginBottom: 16 }}
-          rules={[{ required: true, message: 'Username is required' }]}
-        >
+        <Form.Item label="" name="username">
           <Input style={{ width: 400, height: 48 }} placeholder="Please input" />
         </Form.Item>
-        <Form.Item label="" name="password" rules={[{ required: true, message: 'Username is required' }]}>
-          <Input style={{ width: 400, height: 48 }} placeholder="Please input" />
+        <Form.Item label="" name="password">
+          <Input.Password style={{ width: 400, height: 48 }} placeholder="Please input" />
         </Form.Item>
-        <Form.Item label="" style={{ width: 400, marginBottom: 0 }}>
+        <Form.Item label="" style={{ marginBottom: 0 }}>
           <Form.Item
-            name="year"
+            name="verifyCode"
             rules={[{ required: true }]}
-            style={{ display: 'inline-block', width: 'calc(50% - 8px)' }}
+            style={{ display: 'inline-block', width: 'calc(96% - 8px)' }}
           >
-            <Input style={{ height: 48 }} placeholder="Input birth year" />
+            <Input placeholder="Input birth year" style={{ height: 48 }} />
           </Form.Item>
           <Form.Item
-            name="month"
-            rules={[{ required: true }]}
-            style={{ display: 'inline-block', width: 'calc(50% - 8px)', margin: '0 8px' }}
+            name="uuid"
+            style={{ display: 'inline-block', width: 'calc(4% - 8px)', margin: '0 8px' }}
           >
-            <img width={120} height={48} src={src}></img>
+            <VerificationCode></VerificationCode>
           </Form.Item>
         </Form.Item>
         <Form.Item label=" " colon={false}>
@@ -61,4 +62,4 @@ const LoginPage: React.FC = () => {
   );
 };
 
-export default LoginPage;
+export default App;

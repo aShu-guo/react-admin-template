@@ -1,12 +1,12 @@
 import React, { ChangeEvent } from 'react';
 import { Avatar, Badge, Button, Dropdown, Input, MenuProps, Space } from 'antd';
 import { BellOutlined, SkinOutlined } from '@ant-design/icons';
-import { useGlobalStore, useLoginStore } from '@stores/index';
+import { useGlobalStore, useUserinfoStore } from '@stores/index';
 import { debounce } from 'lodash-es';
 import styles from '../index.module.css';
 
 const RightContent: React.FC = () => {
-  const { setUserInfo } = useLoginStore();
+  const { setUserInfo } = useUserinfoStore();
   const { setColor, primaryColor } = useGlobalStore();
   const logoutHandle = () => {
     setUserInfo(null);

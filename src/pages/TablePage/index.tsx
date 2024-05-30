@@ -1,10 +1,8 @@
 /* eslint-disable @typescript-eslint/no-inferrable-types */
 import React, {useRef} from 'react';
-import {EllipsisOutlined, PlusOutlined} from '@ant-design/icons';
 import type {ActionType, ProColumns} from '@ant-design/pro-components';
-import {ProTable, TableDropdown} from '@ant-design/pro-components';
-import {Button, Dropdown, Space, Tag} from 'antd';
-import {getTable} from '@services/table';
+import {TableDropdown} from '@ant-design/pro-components';
+import {Space, Tag} from 'antd';
 
 export const waitTimePromise = async (time: number = 100) => {
   return new Promise((resolve) => {
@@ -143,7 +141,8 @@ const columns: ProColumns<GithubIssueItem>[] = [
 const TablePage: React.FC = () => {
   const actionRef = useRef<ActionType>();
   return (
-    <ProTable<GithubIssueItem>
+    <div></div>
+    /*<ProTable<GithubIssueItem>
       columns={columns}
       actionRef={actionRef}
       cardBordered
@@ -202,7 +201,7 @@ const TablePage: React.FC = () => {
           </Button>
         </Dropdown>,
       ]}
-    />
+    />*/
   );
 };
 

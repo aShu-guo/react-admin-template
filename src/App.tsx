@@ -9,11 +9,7 @@ import 'uno.css';
 
 dayjs.locale('zh-cn');
 
-const BasicLayout = lazy(() => import('./layouts'));
-
-export function authLoader() {
-  return { isAdmin: true };
-}
+const BasicLayout = lazy(() => import('./layouts/BasicLayout'));
 
 const App: React.FC = () => {
   const { primaryColor } = useGlobalStore();

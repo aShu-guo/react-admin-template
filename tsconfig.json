@@ -20,9 +20,9 @@
     "paths": {
       "@pages/*": ["pages/*"],
       "@components/*": ["components/*"],
+      "@common/*": ["common/*"],
       "@stores/*": ["stores/*"],
       "@services/*": ["services/*"],
-      "@utils/*": ["utils/*"]
     }
   },
   "include": ["src", "types/auto-imports.d.ts"]

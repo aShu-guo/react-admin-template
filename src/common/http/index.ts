@@ -1,8 +1,8 @@
 import axios, { AxiosRequestConfig } from 'axios';
 import { handleGeneralError, handleNetworkError } from './status';
 import { message } from 'antd';
-import { CacheKey } from '../cache/key';
 import { isExpire } from '../cache';
+import useUserinfoStore from '@stores/userinfo';
 
 type RequestConfig = AxiosRequestConfig & { needAuth?: boolean };
 
@@ -14,7 +14,7 @@ axios.defaults.withCredentials = false;
  */
 const genAPIHost = () => {
   if (JSON.parse(import.meta.env.VITE_OPEN_MOCK)) {
-    return import.meta.env.VITE_API_HOST + '/mock/api';
+    return import.meta.env.VITE_API_HOST;
   } else {
     return import.meta.env.VITE_API_HOST;
   }
@@ -29,10 +29,14 @@ const axiosInstance = axios.create(options);
 // axios实例拦截请求
 axiosInstance.interceptors.request.use(
   (config) => {
-    if (!(config as RequestConfig).needAuth) {
-      const { isValid, value } = isExpire<string>(CacheKey.ACCESS_TOKEN);
-      if (isValid && value?.value) {
-        config.headers['Authorization'] = value.value;
+    console.log('>>>>>>');
+    const { token } = useUserinfoStore.getState();
+    console.log('+++=:', token);
+
+    if ((config as RequestConfig).needAuth) {
+      const isValid = isExpire(token);
+      if (isValid) {
+        config.headers['Authorization'] = token.value;
       }
     }
     return config;
@@ -75,7 +79,12 @@ const get = <T = any>(url: string, params?: object, config?: RequestConfig): Pro
   });
 };
 
-const post = <T = any>(url: string, data?: object, params?: object, config?: RequestConfig): Promise<T> => {
+const post = <T = any>(
+  url: string,
+  data?: object,
+  params?: object,
+  config?: RequestConfig,
+): Promise<T> => {
   return new Promise((resolve, reject) => {
     axiosInstance
       .post(url, data, { params, ...config })

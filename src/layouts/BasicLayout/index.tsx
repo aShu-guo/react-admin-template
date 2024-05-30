@@ -1,11 +1,18 @@
 import React, { Suspense, useState } from 'react';
-import { Navigate, NonIndexRouteObject, Outlet, useLoaderData, useLocation, useNavigate } from 'react-router-dom';
+import {
+  Navigate,
+  NonIndexRouteObject,
+  Outlet,
+  useLoaderData,
+  useLocation,
+  useNavigate,
+} from 'react-router-dom';
 import { Layout, Menu, MenuProps, Spin, theme } from 'antd';
 import HeaderComp from './components/Header';
-import { useLoginStore } from '@stores/index';
-import { routes } from '../routes/router';
-import NoAuthPage from '@components/NoAuthPage';
+import { routes } from '../../routes';
+import NoAuthPage from '@pages/NoAuthPage';
 import 'antd/dist/reset.css';
+import useUserinfoStore from '@stores/userinfo';
 
 type RouteType = NonIndexRouteObject & {
   title: string;
@@ -18,7 +25,7 @@ const BasicLayout: React.FC = () => {
   const [collapsed, setCollapsed] = useState(false);
   const navigate = useNavigate();
   const { pathname } = useLocation();
-  const { userInfo } = useLoginStore();
+  const { userinfo } = useUserinfoStore();
   const {
     token: { colorBgContainer },
   } = theme.useToken();
@@ -41,7 +48,7 @@ const BasicLayout: React.FC = () => {
     navigate(key);
   };
 
-  if (!userInfo) {
+  if (!userinfo) {
     return <Navigate to="/login" replace={true} />;
   }
 
