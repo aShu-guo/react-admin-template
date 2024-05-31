@@ -35,11 +35,11 @@ export const genAlias = (isBuild, _env: 'prod' | 'test'): Alias[] => {
         replacement: 'https://esm.sh/dayjs@1.11.5',
       },
       /* {
-         find: 'ant-design-vue',
-         // https://esm.run/ant-design-vue@3.2.10
-         // https://cdn.jsdelivr.net/npm/ant-design-vue@3.2.10/+esm
-         replacement: 'https://esm.run/ant-design-vue@3.2.10',
-       },*/
+                           find: 'ant-design-vue',
+                           // https://esm.run/ant-design-vue@3.2.10
+                           // https://cdn.jsdelivr.net/npm/ant-design-vue@3.2.10/+esm
+                           replacement: 'https://esm.run/ant-design-vue@3.2.10',
+                         },*/
       {
         find: 'axios',
         replacement: 'https://cdn.jsdelivr.net/npm/axios@0.21.1/+esm',

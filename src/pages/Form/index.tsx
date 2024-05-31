@@ -1,5 +1,16 @@
 import type { CascaderProps } from 'antd';
-import { AutoComplete, Button, Cascader, Checkbox, Col, Form, Input, InputNumber, Row, Select } from 'antd';
+import {
+  AutoComplete,
+  Button,
+  Cascader,
+  Checkbox,
+  Col,
+  Form,
+  Input,
+  InputNumber,
+  Row,
+  Select,
+} from 'antd';
 import { ProCard } from '@ant-design/pro-components';
 import React, { useState } from 'react';
 
@@ -170,7 +181,9 @@ const FormPage: React.FC = () => {
                 if (!value || getFieldValue('password') === value) {
                   return Promise.resolve();
                 }
-                return Promise.reject(new Error('The two passwords that you entered do not match!'));
+                return Promise.reject(
+                  new Error('The two passwords that you entered do not match!'),
+                );
               },
             }),
           ]}
@@ -223,17 +236,29 @@ const FormPage: React.FC = () => {
           <InputNumber addonAfter={suffixSelector} style={{ width: '100%' }} />
         </Form.Item>
 
-        <Form.Item name="website" label="Website" rules={[{ required: true, message: 'Please input website!' }]}>
+        <Form.Item
+          name="website"
+          label="Website"
+          rules={[{ required: true, message: 'Please input website!' }]}
+        >
           <AutoComplete options={websiteOptions} onChange={onWebsiteChange} placeholder="website">
             <Input />
           </AutoComplete>
         </Form.Item>
 
-        <Form.Item name="intro" label="Intro" rules={[{ required: true, message: 'Please input Intro' }]}>
+        <Form.Item
+          name="intro"
+          label="Intro"
+          rules={[{ required: true, message: 'Please input Intro' }]}
+        >
           <Input.TextArea showCount maxLength={100} />
         </Form.Item>
 
-        <Form.Item name="gender" label="Gender" rules={[{ required: true, message: 'Please select gender!' }]}>
+        <Form.Item
+          name="gender"
+          label="Gender"
+          rules={[{ required: true, message: 'Please select gender!' }]}
+        >
           <Select placeholder="select your gender">
             <Option value="male">Male</Option>
             <Option value="female">Female</Option>

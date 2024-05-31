@@ -5,14 +5,16 @@ import {
   Outlet,
   useLoaderData,
   useLocation,
+  useMatches,
   useNavigate,
 } from 'react-router-dom';
-import { Layout, Menu, MenuProps, Spin, theme } from 'antd';
+import { ConfigProvider, Layout, Menu, MenuProps, Spin, theme } from 'antd';
 import HeaderComp from './components/Header';
-import { routes } from '../../routes';
-import NoAuthPage from '@pages/NoAuthPage';
+import NoAuthPage from '@pages/NoAuth';
 import 'antd/dist/reset.css';
 import useUserinfoStore from '@stores/userinfo';
+import { mapPermissionToMenu } from './utils';
+import zhCN from 'antd/locale/zh_CN';
 
 type RouteType = NonIndexRouteObject & {
   title: string;
@@ -29,20 +31,12 @@ const BasicLayout: React.FC = () => {
   const {
     token: { colorBgContainer },
   } = theme.useToken();
-  const { isAdmin } = useLoaderData() as any;
+  const { menuList } = useLoaderData() as any;
+  const route = useMatches();
 
-  const getItems: any = (children: RouteType[]) => {
-    return children.map((item) => {
-      return {
-        key: item.index ? '/' : item.path?.startsWith('/') ? item.path : `/${item.path}`,
-        icon: item.icon,
-        label: item.title,
-        children: item.children ? getItems(item.children) : null,
-      };
-    });
-  };
+  const isAdmin = false;
 
-  const menuItems: MenuProps['items'] = getItems(routes[0].children![0].children.filter((item) => item.path !== '*'));
+  const menuItems: MenuProps['items'] = mapPermissionToMenu(menuList);
 
   const onMenuClick: MenuProps['onClick'] = ({ key }) => {
     navigate(key);
@@ -59,55 +53,66 @@ const BasicLayout: React.FC = () => {
   };
 
   return (
-    <Layout style={{ minHeight: '100vh' }}>
-      <Sider
-        style={{
-          overflow: 'auto',
-          height: '100vh',
-        }}
-        collapsible
-        collapsed={collapsed}
-        onCollapse={(value) => setCollapsed(value)}
-      >
-        <div
+    <ConfigProvider
+      locale={zhCN}
+      theme={{
+        token: {
+          colorPrimary: 'red',
+        },
+      }}
+    >
+      <Layout style={{ minHeight: '100vh' }}>
+        <Sider
           style={{
-            height: 32,
-            margin: 16,
-            background: 'rgba(255, 255, 255, 0.2)',
-          }}
-        />
-        <Menu
-          theme="dark"
-          defaultSelectedKeys={[pathname]}
-          defaultOpenKeys={renderOpenKeys()}
-          mode="inline"
-          items={menuItems}
-          onClick={onMenuClick}
-        />
-      </Sider>
-      <Layout className="site-layout">
-        <Header style={{ padding: '0 10px', background: colorBgContainer }}>
-          <HeaderComp />
-        </Header>
-        {/* height：Header和Footer的默认高度是64 */}
-        <Content
-          style={{
-            padding: 16,
             overflow: 'auto',
-            height: `calc(100vh - 128px)`,
+            height: '100vh',
           }}
+          collapsible
+          collapsed={collapsed}
+          onCollapse={(value) => setCollapsed(value)}
         >
-          {isAdmin ? (
-            <Suspense fallback={<Spin size="large" className="content_spin" />}>
-              <Outlet />
-            </Suspense>
-          ) : (
-            <NoAuthPage />
-          )}
-        </Content>
-        <Footer style={{ textAlign: 'center' }}>react template admin ©2023 Created by Jade</Footer>
+          <div
+            style={{
+              height: 32,
+              margin: 16,
+              background: 'rgba(255, 255, 255, 0.2)',
+            }}
+          />
+          <Menu
+            theme="dark"
+            defaultSelectedKeys={[pathname]}
+            defaultOpenKeys={renderOpenKeys()}
+            mode="inline"
+            items={menuItems}
+            onClick={onMenuClick}
+          />
+        </Sider>
+        <Layout className="site-layout">
+          <Header style={{ padding: '0 10px', background: colorBgContainer }}>
+            <HeaderComp />
+          </Header>
+          {/* height：Header和Footer的默认高度是64 */}
+          <Content
+            style={{
+              padding: 16,
+              overflow: 'auto',
+              height: `calc(100vh - 128px)`,
+            }}
+          >
+            {isAdmin ? (
+              <Suspense fallback={<Spin size="large" className="content_spin" />}>
+                <Outlet />
+              </Suspense>
+            ) : (
+              <NoAuthPage />
+            )}
+          </Content>
+          <Footer style={{ textAlign: 'center' }}>
+            react template admin ©2023 Created by Jade
+          </Footer>
+        </Layout>
       </Layout>
-    </Layout>
+    </ConfigProvider>
   );
 };
 

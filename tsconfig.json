@@ -19,10 +19,12 @@
     "baseUrl": "./src",
     "paths": {
       "@pages/*": ["pages/*"],
+      "@routes/*": ["routes/*"],
       "@components/*": ["components/*"],
       "@common/*": ["common/*"],
       "@stores/*": ["stores/*"],
       "@services/*": ["services/*"],
+      "@layouts/*": ["layouts/*"]
     }
   },
   "include": ["src", "types/auto-imports.d.ts"]

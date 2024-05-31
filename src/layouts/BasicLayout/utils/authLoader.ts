@@ -1,6 +1,3 @@
-import { get } from '@common/http';
-import AuthApis from '@services/auth';
-
 const getMenuList = () =>
   new Promise((resolve) => {
     setTimeout(
@@ -16,7 +13,7 @@ const getMenuList = () =>
           {
             name: 'Form',
             path: '/form',
-            title: '飞行要素',
+            title: '表单页',
             component: 'FormPage',
             icon: 'EditOutlined',
           },
@@ -29,7 +26,7 @@ const getMenuList = () =>
           },
           {
             name: 'Detail',
-            path: '/form',
+            path: '/detail',
             title: '详情页',
             component: 'DetailPage',
             icon: 'BarsOutlined',
@@ -66,7 +63,7 @@ const authLoader = async () => {
   // const data = await get(AuthApis.getMenuList);
   const menuList = await getMenuList();
   console.log('>>menuList:', menuList);
-  return menuList;
+  return { menuList };
 };
 
 export default authLoader;

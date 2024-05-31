@@ -1,14 +1,13 @@
 import React from 'react';
 import { Button, Form, Input, Select } from 'antd';
 import VerificationCode from '@components/VerificationCode';
-import { auth } from '@services/auth';
+import AuthApis from '@services/auth';
 import useUserinfoStore from '@stores/userinfo';
 import { post } from '@common/http';
-import AuthApis from '@services/auth';
 
 const { Option } = Select;
 
-const App: React.FC = () => {
+const LoginPage: React.FC = () => {
   const store = useUserinfoStore();
   const onFinish = async (values: any) => {
     const { Authorization, name, userId } = await post(AuthApis.doLogin, values, undefined, {
@@ -62,4 +61,4 @@ const App: React.FC = () => {
   );
 };
 
-export default App;
+export default LoginPage;

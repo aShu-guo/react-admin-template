@@ -10,19 +10,15 @@ interface GlobalState {
 const useGlobalStore = create<GlobalState>()(
   persist(
     (set) => ({
-      primaryColor: "#247fff",
+      primaryColor: '#247fff',
       setColor: (color) => set(() => ({ primaryColor: color })),
     }),
     {
-      name: "primaryColor",
+      name: 'primaryColor',
       partialize: (state) =>
-        Object.fromEntries(
-          Object.entries(state).filter(([key]) =>
-            ["primaryColor"].includes(key)
-          )
-        ),
-    }
-  )
+        Object.fromEntries(Object.entries(state).filter(([key]) => ['primaryColor'].includes(key))),
+    },
+  ),
 );
 
 export default useGlobalStore;

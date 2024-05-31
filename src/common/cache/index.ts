@@ -56,6 +56,7 @@ export function setAliveValue<T>(
  * @returns {boolean}
  */
 type ExpireResult<T> = { isValid: boolean; value: CacheEntity<T> | undefined };
+
 export function isExpire<T>(key: string): ExpireResult<T>;
 export function isExpire(value: CacheEntity<any>): boolean;
 export function isExpire<T>(kv: string | CacheEntity<T>): ExpireResult<T> | boolean {

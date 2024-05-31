@@ -1,32 +1,31 @@
-import React, { lazy, Suspense } from 'react';
-import { ConfigProvider, Spin } from 'antd';
-import { useGlobalStore } from '@stores/index';
-import zhCN from 'antd/locale/zh_CN';
+import React from 'react';
 import dayjs from 'dayjs';
 import 'dayjs/locale/zh-cn';
 import 'antd/dist/reset.css';
 import 'uno.css';
+import { RouterProvider } from 'react-router-dom';
+import router from './routes/router';
+import { getMenuList } from '@services/auth';
+import { mapPermissionToRoute, UserPermission } from '@layouts/BasicLayout/utils';
 
 dayjs.locale('zh-cn');
 
-const BasicLayout = lazy(() => import('./layouts/BasicLayout'));
-
 const App: React.FC = () => {
-  const { primaryColor } = useGlobalStore();
+  useEffect(() => {
+    getMenuList().then((menuList) => {
+      const subRoutes = router.routes[0].children![0];
+      const routes = mapPermissionToRoute(menuList as UserPermission[]);
 
-  return (
-    <ConfigProvider
-      locale={zhCN}
-      theme={{
-        token: {
-          colorPrimary: primaryColor,
-        },
-      }}
-    >
-      <Suspense fallback={<Spin size="large" className="globa_spin" />}>
-        <BasicLayout />
-      </Suspense>
-    </ConfigProvider>
-  );
+      if (subRoutes.children && subRoutes.children.length <= 1) {
+        subRoutes.children = routes.concat(subRoutes.children ?? []);
+      }
+    });
+    setTimeout(() => {
+      console.log('>>>>routes:', router.routes);
+    });
+  }, []);
+
+  return <RouterProvider router={router} />;
 };
+
 export default App;
