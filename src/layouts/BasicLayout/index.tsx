@@ -34,7 +34,7 @@ const BasicLayout: React.FC = () => {
   const { menuList } = useLoaderData() as any;
   const route = useMatches();
 
-  const isAdmin = false;
+  const isAdmin = true;
 
   const menuItems: MenuProps['items'] = mapPermissionToMenu(menuList);
 

@@ -56,8 +56,10 @@
     "typescript": "^5.4.5",
     "unocss": "^0.60.3",
     "unplugin-auto-import": "^0.17.6",
+    "unplugin-imagemin": "^0.5.18",
     "vite": "^5.2.11",
     "vite-plugin-progress": "^0.0.7",
+    "vite-plugin-static-copy": "^1.0.5",
     "vite-plugin-svg-icons": "^2.0.1",
     "vite-plugin-zip-pack": "^1.2.3",
     "vite-tsconfig-paths": "^4.3.2"

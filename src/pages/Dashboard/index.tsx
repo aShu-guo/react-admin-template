@@ -4,11 +4,13 @@ import DemoCard from './components/DemoCard';
 import DemoColumn from './components/DemoColumn';
 import DemoPie from './components/DemoPie';
 import DemoLine from './components/DemoLine';
+import ThreeDMap from '@components/ThreeDMap';
 
 const Dashboard: React.FC = () => {
   return (
     <React.Fragment>
-      <DemoCard />
+      <ThreeDMap></ThreeDMap>
+      {/*<DemoCard />
       <Row wrap style={{ marginTop: 20 }}>
         <Col span={24} style={{ background: 'white', padding: 10 }}>
           <DemoLine />
@@ -21,7 +23,7 @@ const Dashboard: React.FC = () => {
         <Col style={{ background: 'white', padding: 10, width: '49%' }}>
           <DemoPie />
         </Col>
-      </Row>
+      </Row>*/}
     </React.Fragment>
   );
 };

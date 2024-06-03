@@ -9,10 +9,14 @@ import { getMenuList } from '@services/auth';
 import { mapPermissionToRoute, UserPermission } from '@layouts/BasicLayout/utils';
 
 dayjs.locale('zh-cn');
+export const RouterContext = React.createContext<{ menus: any[] }>({ menus: [] });
 
 const App: React.FC = () => {
+  const [menus, setMenus] = useState<any[]>([]);
+
   useEffect(() => {
-    getMenuList().then((menuList) => {
+    getMenuList().then((menuList: any) => {
+      setMenus(menuList);
       const subRoutes = router.routes[0].children![0];
       const routes = mapPermissionToRoute(menuList as UserPermission[]);
 
@@ -25,7 +29,11 @@ const App: React.FC = () => {
     });
   }, []);
 
-  return <RouterProvider router={router} />;
+  return (
+    <RouterContext.Provider value={{ menus }}>
+      <RouterProvider router={router} />;
+    </RouterContext.Provider>
+  );
 };
 
 export default App;

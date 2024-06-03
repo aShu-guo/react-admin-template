@@ -12,12 +12,16 @@ import { ConfigZipPackPlugin } from './zip-pack';
 import { ConfigProgressPlugin } from './progress';
 // import { ConfigImageminPlugin } from './imagemin';
 import { ConfigLegacyPlugin } from './legacy';
+import { ConfigCesiumStatic } from './import-cesium-static';
 
 export function createVitePlugins(isBuild: boolean, buildEnv: 'prod' | 'test') {
   const vitePlugins: (PluginOption | PluginOption[])[] = [react(), UnoCSS()];
 
   // 使用API无需import
   vitePlugins.push(AutoImportDeps());
+
+  // 导出cesium静态资源
+  vitePlugins.push(ConfigCesiumStatic());
 
   // 开启.zip压缩
   vitePlugins.push(ConfigZipPackPlugin(isBuild));

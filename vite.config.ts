@@ -1,6 +1,7 @@
 import { ConfigEnv, UserConfig } from 'vite';
 import { resolve } from 'path';
 import { createVitePlugins } from './config/plugins';
+import { cesiumBaseUrl } from './config/plugins/import-cesium-static';
 
 export default ({ command, mode }: ConfigEnv): UserConfig => {
   const isBuild = command === 'build';
@@ -8,6 +9,11 @@ export default ({ command, mode }: ConfigEnv): UserConfig => {
 
   return {
     envDir: './env',
+    define: {
+      // Define relative base path in cesium for loading assets
+      // https://vitejs.dev/config/shared-options.html#define
+      CESIUM_BASE_URL: JSON.stringify(`/${cesiumBaseUrl}`),
+    },
     // plugins
     resolve: {
       alias: {

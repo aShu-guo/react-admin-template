@@ -8,14 +8,14 @@ export const getMenuList = () =>
     setTimeout(
       () =>
         resolve([
-          /*{
-                                name: 'Index',
-                                path: '/',
-                                index: true,
-                                component: 'Dashboard',
-                                title: 'Dashboard',
-                                icon: 'DashboardOutlined',
-                              },*/
+          {
+            name: 'Index',
+            path: '/',
+            index: true,
+            component: 'Dashboard',
+            title: 'Dashboard',
+            icon: 'DashboardOutlined',
+          },
           {
             name: 'Form',
             path: '/form',
